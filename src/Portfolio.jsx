@@ -20,6 +20,15 @@ const agents = [
     color: '#06B6D4',
     description: 'Tell me your dates, budget, and preferences – I will search, compare and book rooms for you in seconds.',
     stats: { speed: '0.3s', satisfaction: '98%' }
+  },
+  { 
+    id: 'dentist-assistant', 
+    elevenAgentId: 'agent_5201kmhc5aczfmxamhn9my0pk6ay',
+    name: 'Dentist Assistant', 
+    role: 'Urdu-Speaking Dental Assistant', 
+    color: '#10B981',
+    description: 'اردو میں بات کریں – اپوائنٹمنٹ بکنگ، دانتوں کی دیکھ بھال کے مشورے، اور کلینک سے متعلق سوالات کے لیے مدد حاصل کریں۔',
+    stats: { speed: '0.5s', satisfaction: '97%' }
   }
 ];
 
@@ -32,7 +41,7 @@ const Portfolio = () => {
   const [isStarting, setIsStarting] = useState(false);
   const [error, setError] = useState('');
   const [mode, setMode] = useState('voice'); // 'voice' | 'chat'
-  const [sessionMode, setSessionMode] = useState(null); // actual mode of current ElevenLabs session
+  const [sessionMode, setSessionMode] = useState(null); // actual mode of current DeftVoice session
   const chatInputRef = useRef(null);
   const modeRef = useRef('voice');
 
@@ -40,12 +49,12 @@ const Portfolio = () => {
     modeRef.current = mode;
   }, [mode]);
 
-  // ElevenLabs React SDK conversation: used for both voice and chat,
+  // DeftVoice React SDK conversation: used for both voice and chat,
   // but UI shows one mode at a time.
   const conversation = useConversation({
     textOnly: mode === 'chat',
     onMessage: (message) => {
-      console.log('[DeftVoice · ElevenLabs] onMessage raw', message);
+      console.log('[DeftVoice · DeftVoice] onMessage raw', message);
 
       // Only render into the chat UI when we're in chat mode (using latest mode via ref)
       if (!message || modeRef.current !== 'chat') return;
@@ -53,7 +62,7 @@ const Portfolio = () => {
       try {
         // Simplest, SDK-normalised shape: { source: 'ai', role: 'agent', message: '...' }
         if (message.role === 'agent' && typeof message.message === 'string') {
-          console.log('[DeftVoice · ElevenLabs] normalised agent message → append', message.message);
+          console.log('[DeftVoice · DeftVoice] normalised agent message → append', message.message);
           const agentIdForMessage = activeAgentId || selectedAgentId;
           if (!agentIdForMessage) return;
 
@@ -81,7 +90,7 @@ const Portfolio = () => {
           '';
 
         if ((type === 'agent_response' || type === 'agentResponse') && agentText) {
-          console.log('[DeftVoice · ElevenLabs] agent_response → append', agentText);
+          console.log('[DeftVoice · DeftVoice] agent_response → append', agentText);
           const agentIdForMessage = activeAgentId || selectedAgentId;
           if (!agentIdForMessage) return;
 
@@ -105,7 +114,7 @@ const Portfolio = () => {
 
           // Only show once, when the stream ends.
           if (partType === 'stop' || partType === 'final') {
-            console.log('[DeftVoice · ElevenLabs] text_response_part (final) → append', part.text);
+            console.log('[DeftVoice · DeftVoice] text_response_part (final) → append', part.text);
             const agentIdForMessage = activeAgentId || selectedAgentId;
             if (!agentIdForMessage) return;
 
@@ -122,11 +131,11 @@ const Portfolio = () => {
           }
         }
       } catch (err) {
-        console.error('[DeftVoice · ElevenLabs] Error in onMessage handler', err);
+        console.error('[DeftVoice · DeftVoice] Error in onMessage handler', err);
       }
     },
     onError: (err) => {
-      console.error('ElevenLabs conversation error', err);
+      console.error('DeftVoice conversation error', err);
       setError('Connection issue. Please try again.');
     },
     onStatusChange: (status) => {
@@ -139,7 +148,7 @@ const Portfolio = () => {
 
   const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
-  // Ensure ElevenLabs React SDK session is started (voice or chat)
+  // Ensure DeftVoice React SDK session is started (voice or chat)
   const ensureSession = async (targetMode) => {
     if (!selectedAgent) return;
 
@@ -166,7 +175,7 @@ const Portfolio = () => {
       try {
         await conversation.endSession();
       } catch (e) {
-        console.warn('Ending previous ElevenLabs session failed (continuing anyway)', e);
+        console.warn('Ending previous DeftVoice session failed (continuing anyway)', e);
       }
       setActiveAgentId(null);
     }
@@ -188,7 +197,7 @@ const Portfolio = () => {
       setActiveAgentId(selectedAgent.id);
       setSessionMode(desiredMode);
     } catch (err) {
-      console.error('Failed to start ElevenLabs session', err);
+      console.error('Failed to start DeftVoice session', err);
       if (err && err.name === 'NotAllowedError') {
         setError('Please allow microphone access in your browser to talk to the agent.');
       } else {
@@ -238,7 +247,7 @@ const Portfolio = () => {
     setError('');
 
     try {
-      console.log('[DeftVoice · ElevenLabs] handleSendMessage via SDK', {
+      console.log('[DeftVoice · DeftVoice] handleSendMessage via SDK', {
         mode,
         trimmed,
         status: conversation.status,
@@ -261,7 +270,7 @@ const Portfolio = () => {
 
       await conversation.sendUserMessage(trimmed);
     } catch (err) {
-      console.error('Error sending message to ElevenLabs agent', err);
+      console.error('Error sending message to DeftVoice agent', err);
       setError('Could not send your message. Please try again.');
     }
   };
@@ -524,27 +533,29 @@ const Portfolio = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={handleFocusChat}
+                    disabled
+                    title="Chat feature coming soon"
                     style={{
                       padding: '12px 18px',
                       borderRadius: '999px',
                       border: '1px solid #E5E7EB',
-                      background: '#ffffff',
-                      color: '#374151',
+                      background: '#F3F4F6',
+                      color: '#9CA3AF',
                       fontWeight: 600,
                       display: 'flex',
                       alignItems: 'center',
                       gap: '8px',
-                      cursor: 'pointer',
+                      cursor: 'not-allowed',
                       fontSize: '0.95rem',
+                      opacity: 0.7,
                     }}
                   >
-                    <MessageSquare size={18} /> Switch to Chat
+                    <MessageSquare size={18} /> Chat Coming Soon
                   </button>
                 </div>
 
                 <div style={{ marginTop: 14, fontSize: '0.78rem', color: '#9CA3AF' }}>
-                  Powered by ElevenLabs realtime voice · Optimized for Chrome
+                  Powered by DeftVoice realtime voice · Optimized for Chrome
                 </div>
               </div>
             </div>
@@ -738,7 +749,7 @@ const Portfolio = () => {
              {error ? (
                <span style={{ color: '#DC2626' }}>{error}</span>
              ) : (
-               <span>Powered by DeftVoice · ElevenLabs Agents</span>
+               <span>Powered by DeftVoice · DeftVoice Agents</span>
              )}
            </div>
         </div>
