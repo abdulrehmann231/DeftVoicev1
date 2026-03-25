@@ -1,11 +1,12 @@
 import React from 'react';
 import './index.css';
 import heroSculpture from './assets/hero_sculpture_v2.png';
-import { Zap, Link as LinkIcon, Activity, ArrowUpRight, Cloud, ShieldCheck, Phone, Globe, Calendar, MessageSquare, Users, Headphones } from 'lucide-react';
+import { Zap, Link as LinkIcon, Activity, ArrowUpRight, Cloud, ShieldCheck, Phone, Globe, Calendar, MessageSquare, Users, Headphones, Menu, X } from 'lucide-react';
 import Portfolio from './Portfolio';
 
 function App() {
   const [currentView, setCurrentView] = React.useState('home');
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
     <div style={{
@@ -20,7 +21,7 @@ function App() {
       position: 'relative'
     }}>
       {/* Navbar */}
-      <nav style={{
+      <nav className="dv-nav" style={{
         width: '100%',
         padding: '24px 5%',
         display: 'flex',
@@ -29,7 +30,7 @@ function App() {
         boxSizing: 'border-box',
         zIndex: 50
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }} onClick={() => setCurrentView('home')}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }} onClick={() => { setCurrentView('home'); setMenuOpen(false); }}>
           <div style={{
             width: '32px',
             height: '32px',
@@ -45,8 +46,12 @@ function App() {
           <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: '800', letterSpacing: '-0.04em', color: '#111827' }}>DeftVoice</h1>
         </div>
 
-        <div style={{ display: 'flex', gap: '48px', alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: '32px' }}>
+        <button className="dv-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        <div className={`dv-nav-right ${menuOpen ? 'open' : ''}`} style={{ display: 'flex', gap: '48px', alignItems: 'center' }}>
+          <div className="dv-nav-links" style={{ display: 'flex', gap: '32px' }}>
             {['Portfolio', 'Developers', 'Company'].map(item => (
               <a 
                 key={item} 
@@ -56,6 +61,7 @@ function App() {
                   if (item === 'Portfolio') setCurrentView('portfolio');
                   if (item === 'Developers') setCurrentView('developers');
                   if (item === 'Company') setCurrentView('company');
+                  setMenuOpen(false);
                 }}
                 style={{
                   color: (currentView === item.toLowerCase()) ? '#111827' : '#4B5563',
@@ -72,6 +78,7 @@ function App() {
             ))}
           </div>
           <a
+            className="dv-nav-cta"
             href="https://cal.com/deftvoice"
             target="_blank"
             rel="noopener noreferrer"
@@ -97,7 +104,7 @@ function App() {
 
       {/* Main Content Areas */}
       {currentView === 'home' && (
-        <main style={{
+        <main className="dv-hero" style={{
           flex: 1,
           position: 'relative',
           display: 'flex',
@@ -110,7 +117,7 @@ function App() {
         }}>
 
           {/* Centered Image Layer */}
-          <div style={{
+          <div className="dv-hero-image" style={{
             position: 'absolute',
             top: '55%',
             left: '60%',
@@ -143,7 +150,7 @@ function App() {
           </div>
 
           {/* Text Layer (Overlapping) */}
-          <div style={{
+          <div className="dv-hero-text" style={{
             position: 'relative',
             zIndex: 2,
             width: '100%',
@@ -194,7 +201,7 @@ function App() {
           </div>
 
           {/* Annotations - Sleek Glass Pills with Icons */}
-          <div style={{
+          <div className="dv-hero-pill" style={{
             position: 'absolute',
             top: '25%',
             left: '42%',
@@ -222,7 +229,7 @@ function App() {
             </div>
           </div>
 
-          <div style={{
+          <div className="dv-hero-pill" style={{
             position: 'absolute',
             top: '50%',
             right: '25%',
@@ -252,7 +259,7 @@ function App() {
 
 
           {/* Card Mockup on Right - Sleek Stats */}
-          <div style={{
+          <div className="dv-hero-stats-card" style={{
             position: 'absolute',
             bottom: '5%',
             right: '8%',
@@ -337,7 +344,7 @@ function App() {
             </p>
           </div>
 
-          <div style={{
+          <div className="dv-dev-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px',
@@ -352,7 +359,7 @@ function App() {
               display: 'flex',
               flexDirection: 'column',
             }}>
-              <div style={{
+              <div className="dv-dev-card-header" style={{
                 padding: '36px 32px 28px',
                 background: 'linear-gradient(135deg, #4F46E512 0%, #ffffff 100%)',
                 borderBottom: '1px solid rgba(0,0,0,0.04)',
@@ -384,7 +391,7 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ padding: '24px 32px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div className="dv-dev-card-body" style={{ padding: '24px 32px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div>
                   <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
                     Tech Stack
@@ -450,7 +457,7 @@ function App() {
               display: 'flex',
               flexDirection: 'column',
             }}>
-              <div style={{
+              <div className="dv-dev-card-header" style={{
                 padding: '36px 32px 28px',
                 background: 'linear-gradient(135deg, #06B6D412 0%, #ffffff 100%)',
                 borderBottom: '1px solid rgba(0,0,0,0.04)',
@@ -482,7 +489,7 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ padding: '24px 32px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div className="dv-dev-card-body" style={{ padding: '24px 32px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div>
                   <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
                     Tech Stack
@@ -589,7 +596,7 @@ function App() {
           </div>
 
           {/* What We Do - Feature Cards */}
-          <div style={{
+          <div className="dv-company-features" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
@@ -684,7 +691,7 @@ function App() {
           </div>
 
           {/* How It Works */}
-          <div style={{
+          <div className="dv-how-it-works-card" style={{
             background: '#fff',
             borderRadius: '24px',
             padding: '48px 40px',
@@ -701,7 +708,7 @@ function App() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+            <div className="dv-how-it-works" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
               {[
                 { step: '01', title: 'Book a Meeting', desc: 'Schedule a consultation call where we understand your business, use case, and requirements.', icon: Calendar },
                 { step: '02', title: 'We Build Your Agent', desc: 'Our team designs and trains a custom AI agent tailored specifically to your business needs.', icon: Headphones },
@@ -742,7 +749,7 @@ function App() {
           </div>
 
           {/* CTA */}
-          <div style={{
+          <div className="dv-cta-section" style={{
             background: 'linear-gradient(135deg, #111827 0%, #1F2937 100%)',
             borderRadius: '24px',
             padding: '48px 40px',

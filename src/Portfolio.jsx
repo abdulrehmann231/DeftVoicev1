@@ -288,7 +288,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div style={{
+    <div className="dv-portfolio-layout" style={{
       width: '100%',
       height: '100%',
       minHeight: '80vh',
@@ -301,13 +301,13 @@ const Portfolio = () => {
     }}>
       
       {/* LEFT: Agent Selector (Minimal List) */}
-      <div style={{
+      <div className="dv-agent-sidebar" style={{
         width: '300px',
         display: 'flex',
         flexDirection: 'column',
         gap: '20px'
       }}>
-        <h3 style={{ 
+        <h3 className="dv-sidebar-title" style={{ 
           fontSize: '0.8rem', 
           fontWeight: 700, 
           color: '#9CA3AF', 
@@ -373,7 +373,7 @@ const Portfolio = () => {
       </div>
 
       {/* RIGHT: Main Stage (Interactive Area) */}
-      <div style={{
+      <div className="dv-stage" style={{
         flex: 1,
         maxWidth: '800px',
         height: '600px',
@@ -389,12 +389,12 @@ const Portfolio = () => {
       }}>
         
         {/* Header/Banner of the Stage */}
-        <div style={{
+        <div className="dv-stage-header" style={{
           padding: '32px 32px 24px',
           background: `linear-gradient(135deg, ${selectedAgent.color}12 0%, #ffffff 100%)`,
           borderBottom: '1px solid rgba(0,0,0,0.03)'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div className="dv-stage-header-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
               <h2 style={{ fontSize: '2.4rem', fontWeight: 800, margin: 0, color: '#111827', letterSpacing: '-0.03em' }}>
                 {selectedAgent.name}
@@ -405,7 +405,7 @@ const Portfolio = () => {
             </div>
             
             {/* Stats Pills */}
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div className="dv-stats-pills" style={{ display: 'flex', gap: '12px' }}>
               <div style={{ background: '#F3F4F6', padding: '8px 16px', borderRadius: '100px', display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <Zap size={16} color="#4B5563" /> <span style={{ fontWeight: 600, color: '#374151' }}>{selectedAgent.stats.speed} Latency</span>
               </div>
@@ -500,7 +500,7 @@ const Portfolio = () => {
                     : 'Click the button below to start a live call with this agent.'}
                 </div>
 
-                <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                <div className="dv-voice-buttons" style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                   <button
                     onClick={handleToggleCall}
                     disabled={isStarting}
@@ -722,7 +722,7 @@ const Portfolio = () => {
         </div>
 
         {/* Bottom Bar: Live Transcript / Status */}
-        <div style={{
+        <div className="dv-bottom-bar" style={{
           padding: '20px',
           borderTop: '1px solid #F3F4F6',
           display: 'flex',

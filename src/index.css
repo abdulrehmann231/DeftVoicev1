@@ -26,7 +26,7 @@ body {
 
 #root {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -66,4 +66,194 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* ========= Hamburger (hidden on desktop) ========= */
+.dv-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none !important;
+  border: none !important;
+  color: #111827;
+  cursor: pointer;
+  padding: 4px;
+  box-shadow: none !important;
+}
+
+/* ========= Responsive — Mobile (≤768px) ========= */
+@media (max-width: 768px) {
+  /* --- Navbar --- */
+  .dv-hamburger {
+    display: flex !important;
+  }
+  .dv-nav {
+    position: relative;
+  }
+  .dv-nav-right {
+    display: none !important;
+  }
+  .dv-nav-right.open {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px 5%;
+    gap: 20px !important;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+    border-bottom: 1px solid #E5E7EB;
+    z-index: 100;
+    align-items: stretch !important;
+  }
+  .dv-nav-right.open .dv-nav-links {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .dv-nav-right.open .dv-nav-links a {
+    font-size: 1.05rem !important;
+    padding: 8px 0;
+  }
+  .dv-nav-right.open .dv-nav-cta {
+    text-align: center !important;
+    padding: 12px 20px !important;
+    border-radius: 12px;
+  }
+
+  /* --- Home Hero --- */
+  .dv-hero {
+    min-height: 50vh !important;
+    padding: 20px 5% !important;
+  }
+  .dv-hero-image {
+    display: none !important;
+  }
+  .dv-hero-pill {
+    display: none !important;
+  }
+  .dv-hero-stats-card {
+    display: none !important;
+  }
+  .dv-hero-text {
+    margin-top: 0 !important;
+  }
+  .dv-hero-text h1 {
+    font-size: clamp(2.2rem, 9vw, 4rem) !important;
+  }
+
+  /* --- Portfolio --- */
+  .dv-portfolio-layout {
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 16px 0 !important;
+    min-height: auto !important;
+    align-items: stretch !important;
+  }
+  .dv-agent-sidebar {
+    width: 100% !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding-bottom: 8px;
+  }
+  .dv-agent-sidebar > * {
+    flex-shrink: 0;
+  }
+  .dv-sidebar-title {
+    display: none !important;
+  }
+  .dv-stage {
+    height: auto !important;
+    min-height: 480px;
+    max-width: 100% !important;
+    border-radius: 20px !important;
+  }
+  .dv-stage-header {
+    padding: 20px 16px 16px !important;
+  }
+  .dv-stage-header-inner {
+    flex-direction: column !important;
+    gap: 12px;
+  }
+  .dv-stage-header h2 {
+    font-size: 1.5rem !important;
+  }
+  .dv-stats-pills {
+    display: none !important;
+  }
+  .dv-voice-buttons {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .dv-bottom-bar {
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center;
+    padding: 14px 16px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* --- Developers --- */
+  .dv-dev-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dv-dev-card-header {
+    padding: 28px 20px 20px !important;
+  }
+  .dv-dev-card-body {
+    padding: 20px !important;
+  }
+
+  /* --- Company --- */
+  .dv-company-features {
+    grid-template-columns: 1fr !important;
+  }
+  .dv-how-it-works {
+    grid-template-columns: 1fr !important;
+  }
+  .dv-how-it-works-card {
+    padding: 32px 20px !important;
+  }
+  .dv-cta-section {
+    padding: 32px 20px !important;
+  }
+  .dv-cta-section h3 {
+    font-size: 1.3rem !important;
+  }
+}
+
+/* ========= Responsive — Tablet (769–1024px) ========= */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .dv-portfolio-layout {
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: center !important;
+  }
+  .dv-agent-sidebar {
+    width: 100% !important;
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 12px !important;
+  }
+  .dv-sidebar-title {
+    display: none !important;
+  }
+  .dv-agent-sidebar > * {
+    flex-shrink: 0;
+  }
+  .dv-stage {
+    max-width: 100% !important;
+    width: 100%;
+  }
+  .dv-hero-pill {
+    display: none !important;
+  }
+  .dv-hero-stats-card {
+    right: 3% !important;
+  }
+  .dv-company-features {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
