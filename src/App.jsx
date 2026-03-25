@@ -157,7 +157,7 @@ function App() {
             marginTop: '-60px'
           }}>
             {/* Tagline */}
-            <div style={{
+            <div className="dv-hero-tagline" style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
@@ -198,6 +198,58 @@ function App() {
                 WebkitTextFillColor: 'transparent'
               }}>Voice AI</span>
             </h1>
+
+            <p className="dv-hero-subtitle" style={{
+              fontSize: '1.1rem',
+              color: '#6B7280',
+              lineHeight: 1.7,
+              marginTop: '24px',
+              marginBottom: '32px',
+              maxWidth: '480px',
+            }}>
+              Custom AI voice and chat agents that handle calls, bookings, and support — built for your business.
+            </p>
+
+            <div className="dv-hero-cta" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <a
+                href="https://cal.com/deftvoice"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '14px 28px',
+                  borderRadius: '14px',
+                  background: '#111827',
+                  color: '#fff',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  textDecoration: 'none',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+                  transition: 'transform 0.15s ease',
+                }}
+              >
+                Book a Meeting <ArrowUpRight size={16} />
+              </a>
+              <button
+                onClick={() => setCurrentView('portfolio')}
+                style={{
+                  padding: '14px 28px',
+                  borderRadius: '14px',
+                  background: 'rgba(255,255,255,0.8)',
+                  color: '#111827',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  border: '1px solid #E5E7EB',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                  transition: 'transform 0.15s ease',
+                }}
+              >
+                View Demos
+              </button>
+            </div>
           </div>
 
           {/* Annotations - Sleek Glass Pills with Icons */}
@@ -289,7 +341,7 @@ function App() {
       )}
 
       {currentView === 'portfolio' && (
-        <main style={{
+        <main className="dv-portfolio-wrapper" style={{
           flex: 1,
           width: '100%',
           maxWidth: '1600px',
@@ -297,7 +349,8 @@ function App() {
           padding: '0 5%',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          boxSizing: 'border-box',
         }}>
             <Portfolio />
         </main>

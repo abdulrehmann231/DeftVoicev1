@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -124,8 +128,14 @@ button:focus-visible {
 
   /* --- Home Hero --- */
   .dv-hero {
-    min-height: 50vh !important;
-    padding: 20px 5% !important;
+    flex: 0 1 auto !important;
+    min-height: auto !important;
+    padding: 32px 20px 56px !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
   .dv-hero-image {
     display: none !important;
@@ -138,25 +148,63 @@ button:focus-visible {
   }
   .dv-hero-text {
     margin-top: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .dv-hero-text h1 {
-    font-size: clamp(2.2rem, 9vw, 4rem) !important;
+    font-size: clamp(2.4rem, 10vw, 4rem) !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .dv-hero-tagline {
+    margin-top: 8px !important;
+  }
+  .dv-hero-subtitle {
+    text-align: center !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
+  }
+  .dv-hero-cta {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .dv-hero-cta a,
+  .dv-hero-cta button {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
   }
 
   /* --- Portfolio --- */
+  .dv-portfolio-wrapper {
+    padding: 0 12px !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    align-items: stretch !important;
+  }
   .dv-portfolio-layout {
     flex-direction: column !important;
-    gap: 16px !important;
-    padding: 16px 0 !important;
+    gap: 12px !important;
+    padding: 12px 0 !important;
     min-height: auto !important;
     align-items: stretch !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .dv-agent-sidebar {
     width: 100% !important;
     flex-direction: row !important;
     overflow-x: auto !important;
     gap: 8px !important;
-    padding-bottom: 8px;
+    padding: 0 0 8px 0 !important;
+    box-sizing: border-box !important;
   }
   .dv-agent-sidebar > * {
     flex-shrink: 0;
@@ -166,9 +214,11 @@ button:focus-visible {
   }
   .dv-stage {
     height: auto !important;
-    min-height: 480px;
+    min-height: 520px;
     max-width: 100% !important;
+    width: 100% !important;
     border-radius: 20px !important;
+    box-sizing: border-box !important;
   }
   .dv-stage-header {
     padding: 20px 16px 16px !important;
@@ -187,12 +237,17 @@ button:focus-visible {
     flex-direction: column !important;
     align-items: center;
   }
+  .dv-voice-buttons button {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
   .dv-bottom-bar {
     flex-direction: column !important;
     gap: 8px !important;
     text-align: center;
     padding: 14px 16px !important;
-    font-size: 0.8rem !important;
+    font-size: 0.78rem !important;
   }
 
   /* --- Developers --- */
@@ -226,10 +281,14 @@ button:focus-visible {
 
 /* ========= Responsive — Tablet (769–1024px) ========= */
 @media (max-width: 1024px) and (min-width: 769px) {
+  .dv-portfolio-wrapper {
+    box-sizing: border-box !important;
+  }
   .dv-portfolio-layout {
     flex-direction: column !important;
     gap: 24px !important;
     align-items: center !important;
+    box-sizing: border-box !important;
   }
   .dv-agent-sidebar {
     width: 100% !important;
@@ -246,6 +305,7 @@ button:focus-visible {
   .dv-stage {
     max-width: 100% !important;
     width: 100%;
+    box-sizing: border-box !important;
   }
   .dv-hero-pill {
     display: none !important;
